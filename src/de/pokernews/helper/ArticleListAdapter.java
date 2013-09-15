@@ -23,7 +23,7 @@ public class ArticleListAdapter extends ArrayAdapter<Article> {
 	private final Context context;
 	private final ArrayList<Article> articles;
 	private SmartImageView imgView;
-
+	private TextView tvDate;
 	private TextView tvTitle;
 	
 
@@ -49,9 +49,12 @@ public class ArticleListAdapter extends ArrayAdapter<Article> {
 		imgView.setImageUrl(articles.get(position).getImgURL());
 		
 		tvTitle = (TextView) rowView.findViewById(R.id.tvTitle);
+		tvDate = (TextView) rowView.findViewById(R.id.tvDate);
 		
 		//System.out.println("img id: " + imageList.get(position).getId());
 		tvTitle.setText(articles.get(position).getTitle());
+		
+		tvDate.setText(articles.get(position).getDate());
 		
 		
 		// Return ListRow.

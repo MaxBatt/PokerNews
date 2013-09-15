@@ -8,7 +8,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import de.pokernews.activities.HGPActivity;
+import de.pokernews.activities.PNActivity;
+import de.pokernews.activities.POActivity;
 import de.pokernews.activities.PSActivity;
+import de.pokernews.activities.PZActivity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -39,27 +43,45 @@ public class GetUrlsTask extends AsyncTask<String, Integer, ArrayList<ArticleInf
 	protected ArrayList<ArticleInfo> doInBackground(String... urls) {
 		
 		String url = urls[0];
-		
 		Document doc;
 		try {
 			doc = Jsoup.connect(url).get();
 			Elements links = doc.select(linkSelector); 
+			System.out.println("Size: " + links.size());
 			
+			
+			int count = 0;
+			int limit = 11;
 			for (Element link : links){
+				if(count > limit) break;
 				String articleURL = link.attr("abs:href");
 				ArticleInfo articleInfo = new ArticleInfo(articleURL);
 				articleInfos.add(articleInfo);
+				//System.out.println("URL: " + articleInfo.getUrl());
+				count ++;
+
 			}
 			
 			Elements images = doc.select(imgSelector); 
-			int count = 0;
+			count = 0;
 			for (Element img : images){
+				if(count > limit) break;
 				String imgURL = img.attr("src");
+				
+				
+				if(callingActivity.equals("PO")){
+					if(imgURL.contains("?")){
+						imgURL = imgURL.substring(0, imgURL.indexOf("?"));
+					}
+					imgURL = "http://www.pokerolymp.com" + imgURL;
+				}
+				
+				//System.out.println("url: " + imgURL);
+				
 				articleInfos.get(count).setImg(imgURL);
 				count++;
 			}
 
-		
 		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -75,7 +97,31 @@ public class GetUrlsTask extends AsyncTask<String, Integer, ArrayList<ArticleInf
 		if(callingActivity.equals("PS")){
 				PSActivity psActivity = (PSActivity) context;
 				psActivity.articleInfos = articleInfos;
-				super.onPostExecute(articleInfos); 
+				super.onPostExecute(articleInfos); 				
+		}
+		
+		if (callingActivity.equals("PO")) {
+			POActivity activity = (POActivity) context;
+			activity.articleInfos = articleInfos;
+			super.onPostExecute(articleInfos);
+		}
+		
+		if (callingActivity.equals("HGP")) {
+			HGPActivity activity = (HGPActivity) context;
+			activity.articleInfos = articleInfos;
+			super.onPostExecute(articleInfos);
+		}
+		
+		if (callingActivity.equals("PN")) {
+			PNActivity activity = (PNActivity) context;
+			activity.articleInfos = articleInfos;
+			super.onPostExecute(articleInfos);
+		}
+		
+		if (callingActivity.equals("PZ")) {
+			PZActivity activity = (PZActivity) context;
+			activity.articleInfos = articleInfos;
+			super.onPostExecute(articleInfos);
 		}
 			
 		       

@@ -9,14 +9,14 @@
     tools:context=".PSActivity" >
 
     <Button
-        android:id="@+id/btnHochgepokert"
+        android:id="@+id/btnPO"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/btnPS"
         android:layout_alignBottom="@+id/btnPS"
         android:layout_alignParentRight="true"
-        android:onClick="openHP"
-        android:text="Hochgepokert" />
+        android:onClick="openPO"
+        android:text="PokerOlymp" />
 
     <Button
         android:id="@+id/btnPS"
@@ -24,9 +24,41 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="44dp"
         android:layout_toLeftOf="@+id/btnHochgepokert"
         android:onClick="openPS"
         android:text="PS.de" />
+
+    <Button
+        android:id="@+id/btnHGP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnPS"
+        android:layout_below="@+id/btnPS"
+        android:layout_marginTop="30dp"
+        android:onClick="openHGP"
+        android:text="Hochgepokert" />
+
+    <Button
+        android:id="@+id/btnPN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnHGP"
+        android:layout_alignBottom="@+id/btnHGP"
+        android:layout_alignLeft="@+id/btnPO"
+        android:layout_alignParentRight="true"
+        android:onClick="openPN"
+        android:text="PokerNews" />
+
+    <Button
+        android:id="@+id/btnPZ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnHGP"
+        android:layout_alignRight="@+id/btnHGP"
+        android:layout_below="@+id/btnHGP"
+        android:layout_marginTop="38dp"
+        android:onClick="openPZ"
+        android:text="Pokerzeit" />
 
 </RelativeLayout>

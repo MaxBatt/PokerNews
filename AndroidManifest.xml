@@ -32,8 +32,35 @@
         
         <activity
             android:name="de.pokernews.activities.PSActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:configChanges="orientation|screenSize">
         </activity>
+        
+        <activity
+            android:name="de.pokernews.activities.POActivity"
+            android:label="@string/app_name" 
+            android:configChanges="orientation|screenSize">
+        </activity>
+        
+        <activity
+            android:name="de.pokernews.activities.PZActivity"
+            android:label="@string/app_name" 
+            android:configChanges="orientation|screenSize">
+        </activity>
+        
+        <activity
+            android:name="de.pokernews.activities.HGPActivity"
+            android:label="@string/app_name" 
+            android:configChanges="orientation|screenSize">
+        </activity>
+        
+         <activity
+            android:name="de.pokernews.activities.PNActivity"
+            android:label="@string/app_name" 
+            android:configChanges="orientation|screenSize">
+        </activity>
+        
+        
     </application>
 
 </manifest>

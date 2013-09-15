@@ -38,10 +38,29 @@ public class MainActivity extends Activity {
 	}
 	
 	
-	/*
-	public void openHP(View v){
-		Intent i = new Intent(this, HPActivity.class);
+	
+	public void openPO(View v){
+		Intent i = new Intent(this, POActivity.class);
+		i.putExtra("activity", "PO");
 		startActivity(i);
 	}
-	*/
+	
+	public void openHGP(View v){
+		Intent i = new Intent(this, HGPActivity.class);
+		i.putExtra("activity", "HGP");
+		startActivity(i);
+	}
+	
+	public void openPN(View v){
+		Intent i = new Intent(this, PNActivity.class);
+		i.putExtra("activity", "PN");
+		startActivity(i);
+	}
+	
+	public void openPZ(View v){
+		Intent i = new Intent(this, PZActivity.class);
+		i.putExtra("activity", "PZ");
+		startActivity(i);
+	}
+	
 }

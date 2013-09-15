@@ -1,10 +1,13 @@
 package de.pokernews.activities;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import com.google.gson.Gson;
 
@@ -31,7 +34,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class PSActivity extends ListActivity implements OnItemClickListener {
+public class PZActivity extends ListActivity implements OnItemClickListener {
 
 	// Adapter for Listview
 	private ArticleListAdapter adapter;
@@ -44,10 +47,10 @@ public class PSActivity extends ListActivity implements OnItemClickListener {
 	private SharedPreferences prefs;
 	private String callingActivity;
 	
-	final static String BASE_URL = "http://de.pokerstrategy.com/home/";
+	final static String BASE_URL = "http://www.cardplayer.com/poker-news";
 	final static String PREF_FILE = "de.pokernews";
-	final static String linkSelector = ".top-news div h5 a";
-	final static String imgSelector = ".top-news a img";
+	final static String linkSelector = ".newsinfo a";
+	final static String imgSelector = ".newsicon img";
 
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
@@ -77,7 +80,7 @@ public class PSActivity extends ListActivity implements OnItemClickListener {
 				case 1:
 					// System.out.println(articleURLs.get(0));
 					GetArticlesTask getArticlesFromPSTask = new GetArticlesTask(
-							PSActivity.this, PSActivity.articleHandler);
+							PZActivity.this, PZActivity.articleHandler);
 					getArticlesFromPSTask.execute(articleInfos);
 					break;
 				}
@@ -94,14 +97,14 @@ public class PSActivity extends ListActivity implements OnItemClickListener {
 				case 1:
 
 					// Create ListAdapter
-					adapter = new ArticleListAdapter(PSActivity.this, articles);
+					adapter = new ArticleListAdapter(PZActivity.this, articles);
 					setListAdapter(adapter);
 
 					// Fill ListView
 					ListView listView = getListView();
 
 					// OnItemClickListener for Click on an item in list
-					listView.setOnItemClickListener(PSActivity.this);
+					listView.setOnItemClickListener(PZActivity.this);
 
 					// Dismiss ProgressDialog, when Gallery is loaded
 					pd.dismiss();
@@ -124,7 +127,7 @@ public class PSActivity extends ListActivity implements OnItemClickListener {
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 
-		Intent i = new Intent(PSActivity.this, WebViewActivity.class);
+		Intent i = new Intent(PZActivity.this, WebViewActivity.class);
 		i.putExtra("content", articles.get(position).getContent());
 		startActivity(i);
 
@@ -168,22 +171,44 @@ public class PSActivity extends ListActivity implements OnItemClickListener {
 					Document doc;
 					try {
 						// Artikel abrufen
-						doc = Jsoup.connect(info.getUrl()).get();
+						doc = Jsoup.parse(new URL(info.getUrl()).openStream(), "UTF-8", info.getUrl());
 						// Titel
-						String title = doc.select(".articleBody h1").first()
-								.text();
+						String title = doc.select("#contributor tbody tr td h1").text();
 						// DAtum
-						String date = doc.select(".articleBody p").first()
-								.text();
+						doc.select(".byline a, .byline script").remove();
+						String date = doc.select(".byline").html().substring(34, doc.select(".byline").html().length());
+						date = date.substring(0, 12);
+						doc.select(".byline").html(date);
 						// Headline
-						String headline = doc.select(".articleBody h1").first()
-								.nextElementSibling().text();
+						String headline = doc.select("#contributor tbody tr td h2").text();
+						
+						doc.select("tbody tr:last-child").remove();
+						
 						
 						// Links aus Text entfernen
 						doc.select("a").removeAttr("href");
 						
+						System.out.println(date);
+						
+						
+						
+
+						/*
+						// Base-URL vor IMG-URLS setzen,. weil relative URLs
+						Elements images = doc.select(".limited img");
+						for (Element image : images){
+							String src = image.attr("src");
+							//System.out.println("SRC: " + src.substring(0, 1));
+							if(src.substring(0, 1).equals("/")){
+								image.attr("src", "http://de.pokernews.com" + src);
+							}
+							
+						}
+						*/		
+						
 						// HTML Content
-						String content = doc.select(".articleBody").html();
+						String content = doc.select(".col1").html();
+						
 
 						// Artikel Objekt bauen
 						Article article = new Article(info.getUrl(),
@@ -223,7 +248,7 @@ public class PSActivity extends ListActivity implements OnItemClickListener {
 
 		@Override
 		protected void onPostExecute(ArrayList<Article> articles) {
-			PSActivity psActivity = (PSActivity) context;
+			PZActivity psActivity = (PZActivity) context;
 			psActivity.articles = articles;
 			super.onPostExecute(articles);
 
