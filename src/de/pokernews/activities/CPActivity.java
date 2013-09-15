@@ -34,7 +34,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class PNActivity extends ListActivity implements OnItemClickListener {
+public class CPActivity extends ListActivity implements OnItemClickListener {
 
 	// Adapter for Listview
 	private ArticleListAdapter adapter;
@@ -47,10 +47,10 @@ public class PNActivity extends ListActivity implements OnItemClickListener {
 	private SharedPreferences prefs;
 	private String callingActivity;
 	
-	final static String BASE_URL = "http://de.pokernews.com/neuigkeiten/popular-this-week/";
+	final static String BASE_URL = "http://www.cardplayer.com/poker-news";
 	final static String PREF_FILE = "de.pokernews";
-	final static String linkSelector = "section ul li div a";
-	final static String imgSelector = "section ul li a img";
+	final static String linkSelector = ".newsinfo a";
+	final static String imgSelector = ".newsicon img";
 
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
@@ -80,7 +80,7 @@ public class PNActivity extends ListActivity implements OnItemClickListener {
 				case 1:
 					// System.out.println(articleURLs.get(0));
 					GetArticlesTask getArticlesFromPSTask = new GetArticlesTask(
-							PNActivity.this, PNActivity.articleHandler);
+							CPActivity.this, CPActivity.articleHandler);
 					getArticlesFromPSTask.execute(articleInfos);
 					break;
 				}
@@ -97,14 +97,14 @@ public class PNActivity extends ListActivity implements OnItemClickListener {
 				case 1:
 
 					// Create ListAdapter
-					adapter = new ArticleListAdapter(PNActivity.this, articles);
+					adapter = new ArticleListAdapter(CPActivity.this, articles);
 					setListAdapter(adapter);
 
 					// Fill ListView
 					ListView listView = getListView();
 
 					// OnItemClickListener for Click on an item in list
-					listView.setOnItemClickListener(PNActivity.this);
+					listView.setOnItemClickListener(CPActivity.this);
 
 					// Dismiss ProgressDialog, when Gallery is loaded
 					pd.dismiss();
@@ -127,7 +127,7 @@ public class PNActivity extends ListActivity implements OnItemClickListener {
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 
-		Intent i = new Intent(PNActivity.this, WebViewActivity.class);
+		Intent i = new Intent(CPActivity.this, WebViewActivity.class);
 		i.putExtra("content", articles.get(position).getContent());
 		startActivity(i);
 
@@ -173,43 +173,29 @@ public class PNActivity extends ListActivity implements OnItemClickListener {
 						// Artikel abrufen
 						doc = Jsoup.parse(new URL(info.getUrl()).openStream(), "UTF-8", info.getUrl());
 						// Titel
-						String title = doc.select("section h1").text();
+						String title = doc.select("#contributor tbody tr td h1").text();
 						// DAtum
-						String date = doc.select("time").first().text();
+						doc.select(".byline a, .byline script").remove();
+						String date = doc.select(".byline").html().substring(34, doc.select(".byline").html().length());
+						date = date.substring(0, 12);
+						doc.select(".byline").html(date);
 						// Headline
-						String headline = "blabla";
+						String headline = doc.select("#contributor tbody tr td h2").text();
+						
+						doc.select("tbody tr:last-child").remove();
+						
 						
 						// Links aus Text entfernen
 						doc.select("a").removeAttr("href");
 						
-						doc.select(".editButton").remove();
-						doc.select(".fblike").remove();
-						doc.select(".social").remove();
-						doc.select(".meta li span").remove();
-						doc.select(".relatedBottom").remove();
-						doc.select(".weekPopularArticles").remove();
-						doc.select(".commentForm").remove();
-						doc.select("#footer").remove();
-						doc.select(".loginToRead").remove();
-						doc.select(".relatedContent").remove();
-						doc.select("iframe").remove();
+						//doc.select("a").attr("href", "http://twitter.com/#!/cardplayermedia").remove();
+						
+						//Tags entfernen
 						doc.select(".tags").remove();
 						
-						doc.select(".meta").attr("style", "list-style: none; padding: 0;");
-						
-						// Base-URL vor IMG-URLS setzen,. weil relative URLs
-						Elements images = doc.select(".limited img");
-						for (Element image : images){
-							String src = image.attr("src");
-							//System.out.println("SRC: " + src.substring(0, 1));
-							if(src.substring(0, 1).equals("/")){
-								image.attr("src", "http://de.pokernews.com" + src);
-							}
-							
-						}
 						
 						// HTML Content
-						String content = doc.select("section").html();
+						String content = doc.select(".col1").html();
 						
 
 						// Artikel Objekt bauen
@@ -250,7 +236,7 @@ public class PNActivity extends ListActivity implements OnItemClickListener {
 
 		@Override
 		protected void onPostExecute(ArrayList<Article> articles) {
-			PNActivity psActivity = (PNActivity) context;
+			CPActivity psActivity = (CPActivity) context;
 			psActivity.articles = articles;
 			super.onPostExecute(articles);
 

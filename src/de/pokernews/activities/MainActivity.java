@@ -20,8 +20,8 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-//		SharedPreferences prefs = getSharedPreferences(PREF_FILE, 0);
-//		prefs.edit().clear().commit();
+		SharedPreferences prefs = getSharedPreferences(PREF_FILE, 0);
+		prefs.edit().clear().commit();
 	}
 
 	@Override
@@ -57,9 +57,15 @@ public class MainActivity extends Activity {
 		startActivity(i);
 	}
 	
-	public void openPZ(View v){
-		Intent i = new Intent(this, PZActivity.class);
-		i.putExtra("activity", "PZ");
+	public void openCP(View v){
+		Intent i = new Intent(this, CPActivity.class);
+		i.putExtra("activity", "CP");
+		startActivity(i);
+	}
+	
+	public void openHDB(View v){
+		Intent i = new Intent(this, HDBActivity.class);
+		i.putExtra("activity", "HDB");
 		startActivity(i);
 	}
 	

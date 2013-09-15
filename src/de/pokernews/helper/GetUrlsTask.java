@@ -8,11 +8,12 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import de.pokernews.activities.HDBActivity;
 import de.pokernews.activities.HGPActivity;
 import de.pokernews.activities.PNActivity;
 import de.pokernews.activities.POActivity;
 import de.pokernews.activities.PSActivity;
-import de.pokernews.activities.PZActivity;
+import de.pokernews.activities.CPActivity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -47,7 +48,7 @@ public class GetUrlsTask extends AsyncTask<String, Integer, ArrayList<ArticleInf
 		try {
 			doc = Jsoup.connect(url).get();
 			Elements links = doc.select(linkSelector); 
-			System.out.println("Size: " + links.size());
+			//System.out.println("Size: " + links.size());
 			
 			
 			int count = 0;
@@ -118,11 +119,19 @@ public class GetUrlsTask extends AsyncTask<String, Integer, ArrayList<ArticleInf
 			super.onPostExecute(articleInfos);
 		}
 		
-		if (callingActivity.equals("PZ")) {
-			PZActivity activity = (PZActivity) context;
+		if (callingActivity.equals("CP")) {
+			CPActivity activity = (CPActivity) context;
 			activity.articleInfos = articleInfos;
 			super.onPostExecute(articleInfos);
 		}
+		
+		if (callingActivity.equals("HDB")) {
+			HDBActivity activity = (HDBActivity) context;
+			activity.articleInfos = articleInfos;
+			super.onPostExecute(articleInfos);
+		}
+		
+		
 			
 		       
 	    	

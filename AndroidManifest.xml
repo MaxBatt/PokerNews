@@ -43,7 +43,7 @@
         </activity>
         
         <activity
-            android:name="de.pokernews.activities.PZActivity"
+            android:name="de.pokernews.activities.CPActivity"
             android:label="@string/app_name" 
             android:configChanges="orientation|screenSize">
         </activity>
@@ -60,6 +60,12 @@
             android:configChanges="orientation|screenSize">
         </activity>
         
+         <activity
+            android:name="de.pokernews.activities.HDBActivity"
+            android:label="@string/app_name" 
+            android:configChanges="orientation|screenSize">
+        </activity>
+   
         
     </application>
 

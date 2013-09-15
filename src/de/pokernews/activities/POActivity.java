@@ -177,7 +177,7 @@ public class POActivity extends ListActivity implements OnItemClickListener {
 						String title = doc.select("#content h1").text();
 						// DAtum
 						doc.select(".entry-info dl dd a").remove();
-						String date = doc.select(".entry-info dl dd").first().text().substring(2, doc.select(".entry-info dl dd").first().text().length() - 1);
+						String date = doc.select(".entry-info dl dd").first().text().substring(2, doc.select(".entry-info dl dd").first().text().length());
 						// Headline
 						String headline = doc.select(".content p").first()
 								.nextElementSibling().text();
@@ -185,8 +185,11 @@ public class POActivity extends ListActivity implements OnItemClickListener {
 						// Links aus Text entfernen
 						doc.select("a").removeAttr("href");
 						
-						doc.select(".entry-info dl dt").remove();
-						doc.select(".entry-info dl dd").last().remove();
+						doc.select(".entry-info dl").remove();
+						doc.select(".entry-info").html(date);
+						doc.select("#content a").last().remove();
+						doc.select("#article-actions").remove();
+						doc.select("#new-comment-link").remove();
 						
 						
 						// Base-URL vor IMG-URLS setzen,. weil relative URLs
@@ -201,7 +204,7 @@ public class POActivity extends ListActivity implements OnItemClickListener {
 						// HTML Content
 						String content = doc.select("#content").html();
 						
-						System.out.println("CONTENT: " + content);
+						//System.out.println("CONTENT: " + content);
 
 						// Artikel Objekt bauen
 						Article article = new Article(info.getUrl(),

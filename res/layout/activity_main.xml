@@ -51,14 +51,23 @@
         android:text="PokerNews" />
 
     <Button
-        android:id="@+id/btnPZ"
+        android:id="@+id/btnCP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/btnHGP"
         android:layout_alignRight="@+id/btnHGP"
         android:layout_below="@+id/btnHGP"
         android:layout_marginTop="38dp"
-        android:onClick="openPZ"
-        android:text="Pokerzeit" />
+        android:onClick="openCP"
+        android:text="CardPlayer" />
+
+    <Button
+        android:id="@+id/btnHDB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnCP"
+        android:layout_alignLeft="@+id/btnPN"
+        android:onClick="openHDB"
+        android:text="HiStakesDB" />
 
 </RelativeLayout>

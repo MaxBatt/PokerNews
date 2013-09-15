@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import com.google.gson.Gson;
 
@@ -182,8 +183,19 @@ public class PSActivity extends ListActivity implements OnItemClickListener {
 						// Links aus Text entfernen
 						doc.select("a").removeAttr("href");
 						
+						doc.select(".articleBody div").first().remove();
+						doc.select(".articleBody div").last().remove();
+						doc.select(".articleBody div").last().remove();
+						doc.select(".articleBody div").last().remove();
+						doc.select(".articleBody div").last().remove();
+						doc.select(".articleBody div").last().remove();
+						doc.select(".articleBody div").last().remove();
+						doc.select(".articleBody div").last().remove();
+						
+						
+						
 						// HTML Content
-						String content = doc.select(".articleBody").html();
+						String content = doc.select(".articleBody").html() + doc.select("#comments").html();
 
 						// Artikel Objekt bauen
 						Article article = new Article(info.getUrl(),
