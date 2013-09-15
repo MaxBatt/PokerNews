@@ -32,8 +32,10 @@ public class MainActivity extends Activity {
 		startActivity(i);
 	}
 	
+	/*
 	public void openHP(View v){
 		Intent i = new Intent(this, HPActivity.class);
 		startActivity(i);
 	}
+	*/
 }
