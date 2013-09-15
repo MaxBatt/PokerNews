@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">PSCrawler</string>
+    <string name="app_name">PokerReader</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    
+    <string name="ps">PokerStrategy</string>
+    <string name="po">PokerOlymp</string>
+    <string name="hgp">Hochgepokert</string>
+    <string name="pn">PokerNews</string>
+    <string name="cp">CardPlayer</string>
+    <string name="hdb">HighstakesDB</string>
+    
+    
 
 </resources>

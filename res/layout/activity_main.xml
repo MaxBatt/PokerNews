@@ -10,64 +10,128 @@
 
     <Button
         android:id="@+id/btnPO"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignBaseline="@+id/btnPS"
         android:layout_alignBottom="@+id/btnPS"
         android:layout_alignParentRight="true"
-        android:onClick="openPO"
-        android:text="PokerOlymp" />
+        android:layout_marginRight="60dp"
+        android:background="@drawable/po_button"
+        android:onClick="openPO" />
 
     <Button
         android:id="@+id/btnPS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="44dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="80dp"
         android:layout_toLeftOf="@+id/btnHochgepokert"
-        android:onClick="openPS"
-        android:text="PS.de" />
+        android:background="@drawable/ps_button"
+        android:onClick="openPS" />
 
     <Button
         android:id="@+id/btnHGP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignLeft="@+id/btnPS"
         android:layout_below="@+id/btnPS"
-        android:layout_marginTop="30dp"
-        android:onClick="openHGP"
-        android:text="Hochgepokert" />
+        android:layout_marginTop="60dp"
+        android:background="@drawable/hgp_button"
+        android:onClick="openHGP" />
 
     <Button
         android:id="@+id/btnPN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignBaseline="@+id/btnHGP"
         android:layout_alignBottom="@+id/btnHGP"
         android:layout_alignLeft="@+id/btnPO"
-        android:layout_alignParentRight="true"
-        android:onClick="openPN"
-        android:text="PokerNews" />
+        android:layout_alignRight="@+id/btnPO"
+        android:background="@drawable/pn_button"
+        android:onClick="openPN" />
 
     <Button
         android:id="@+id/btnCP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignLeft="@+id/btnHGP"
         android:layout_alignRight="@+id/btnHGP"
         android:layout_below="@+id/btnHGP"
-        android:layout_marginTop="38dp"
-        android:onClick="openCP"
-        android:text="CardPlayer" />
+        android:background="@drawable/cp_button"
+        android:onClick="openCP" 
+        android:layout_marginTop="60dp"/>
 
     <Button
         android:id="@+id/btnHDB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignBottom="@+id/btnCP"
         android:layout_alignLeft="@+id/btnPN"
-        android:onClick="openHDB"
-        android:text="HiStakesDB" />
+        android:background="@drawable/hdb_button"
+        android:onClick="openHDB" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnPS"
+        android:layout_alignRight="@+id/btnPS"
+        android:layout_below="@+id/btnPS"
+        android:text="@string/ps" 
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/TextView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnHGP"
+         android:layout_alignRight="@+id/btnHGP"
+        android:layout_below="@+id/btnHGP"
+        android:gravity="center"
+        android:text="@string/hgp" />
+
+    <TextView
+        android:id="@+id/TextView04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnCP"
+        android:layout_alignRight="@+id/btnCP"
+        android:layout_below="@+id/btnCP"
+        android:gravity="center"
+        android:text="@string/cp" />
+
+    <TextView
+        android:id="@+id/TextView05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/btnHDB"
+        android:layout_alignLeft="@+id/btnHDB"
+        android:layout_below="@+id/btnCP"
+        android:gravity="center"
+        android:text="@string/hdb" />
+
+    <TextView
+        android:id="@+id/TextView03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/btnPN"
+        android:layout_alignLeft="@+id/btnPN"
+        android:layout_alignTop="@+id/TextView02"
+                android:layout_below="@+id/btnPN"
+   
+        android:gravity="center"
+        android:text="@string/pn" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignRight="@+id/btnPO"
+        android:layout_alignLeft="@+id/btnPO"
+        android:gravity="center"
+        android:text="@string/po" />
 
 </RelativeLayout>

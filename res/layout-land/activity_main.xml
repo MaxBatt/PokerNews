@@ -1,0 +1,136 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".PSActivity" >
+
+  
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnPS"
+        android:layout_alignRight="@+id/btnPS"
+        android:layout_below="@+id/btnPS"
+        android:text="@string/ps" 
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/TextView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnHGP"
+         android:layout_alignRight="@+id/btnHGP"
+        android:layout_below="@+id/btnHGP"
+        android:gravity="center"
+        android:text="@string/hgp" />
+
+    <TextView
+        android:id="@+id/TextView04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnCP"
+        android:layout_alignRight="@+id/btnCP"
+        android:layout_below="@+id/btnCP"
+        android:gravity="center"
+        android:text="@string/cp" />
+
+    <TextView
+        android:id="@+id/TextView05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/btnHDB"
+        android:layout_alignLeft="@+id/btnHDB"
+        android:layout_below="@+id/btnCP"
+        android:gravity="center"
+        android:text="@string/hdb" />
+
+    <TextView
+        android:id="@+id/TextView03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/btnPN"
+        android:layout_alignLeft="@+id/btnPN"
+        android:layout_alignTop="@+id/TextView02"
+                android:layout_below="@+id/btnPN"
+   
+        android:gravity="center"
+        android:text="@string/pn" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignRight="@+id/btnPO"
+        android:layout_alignLeft="@+id/btnPO"
+        android:gravity="center"
+        android:text="@string/po" />
+    
+    
+
+    <Button
+        android:id="@+id/btnPS"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ps_button"
+        android:onClick="openPS" />
+
+    <Button
+        android:id="@+id/btnPO"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignBaseline="@+id/btnPS"
+        android:layout_alignBottom="@+id/btnPS"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/po_button"
+        android:onClick="openPO" />
+
+    <Button
+        android:id="@+id/btnHGP"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignBaseline="@+id/btnPO"
+        android:layout_alignBottom="@+id/btnPO"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="38dp"
+        android:background="@drawable/hgp_button"
+        android:onClick="openHGP" />
+
+    <Button
+        android:id="@+id/btnCP"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignBottom="@+id/btnHDB"
+        android:layout_alignLeft="@+id/TextView03"
+        android:background="@drawable/cp_button"
+        android:onClick="openCP" />
+    
+     <Button
+        android:id="@+id/btnPN"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignBottom="@+id/btnCP"
+        android:layout_alignRight="@+id/btnCP"
+        android:background="@drawable/pn_button"
+        android:onClick="openPN" />
+
+    <Button
+        android:id="@+id/btnHDB"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignLeft="@+id/TextView02"
+        android:layout_below="@+id/TextView02"
+        android:background="@drawable/hdb_button"
+        android:onClick="openHDB" />
+
+</RelativeLayout>

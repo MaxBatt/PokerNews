@@ -61,9 +61,6 @@ public class PSActivity extends ListActivity implements OnItemClickListener {
 		// Shared Prefs
 		prefs = getSharedPreferences(PREF_FILE, 0);
 
-		// Remove TitleBar
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
 		// Show ProgressDialog until Gallery is loaded
 		pd = ProgressDialog.show(this, "Bitte warten", "Lade Artikel");
 
