@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 
 import de.pokernews.helper.ArticleInfo;
 import de.pokernews.helper.Article;
-import de.pokernews.helper.PS_GetUrlsTask;
+import de.pokernews.helper.GetUrlsTask;
 import de.pokernews.helper.ArticleListAdapter;
 import de.ps.crawler.R;
 
@@ -38,17 +38,24 @@ public class PSActivity extends ListActivity implements OnItemClickListener {
 
 	// ProgressDialog
 	private ProgressDialog pd;
-
-	private static final String BASE_URL = "http://de.pokerstrategy.com/home/";
 	public ArrayList<ArticleInfo> articleInfos = new ArrayList<ArticleInfo>();
 	public ArrayList<Article> articles = new ArrayList<Article>();
 	private static Handler articleHandler;
-	private final static String PREF_FILE = "de.pokernews";
 	private SharedPreferences prefs;
+	private String callingActivity;
 	
+	final static String BASE_URL = "http://de.pokerstrategy.com/home/";
+	final static String PREF_FILE = "de.pokernews";
+	final static String linkSelector = ".top-news div h5 a";
+	final static String imgSelector = ".top-news a img";
 
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
+
+		// Get Extras
+		// Aufrufende Activity
+		Bundle extras = getIntent().getExtras();
+		callingActivity = extras.getString("activity");
 
 		// Shared Prefs
 		prefs = getSharedPreferences(PREF_FILE, 0);
@@ -69,7 +76,7 @@ public class PSActivity extends ListActivity implements OnItemClickListener {
 				switch (msg.what) {
 				case 1:
 					// System.out.println(articleURLs.get(0));
-					PS_GetArticlesTask getArticlesFromPSTask = new PS_GetArticlesTask(
+					GetArticlesTask getArticlesFromPSTask = new GetArticlesTask(
 							PSActivity.this, PSActivity.articleHandler);
 					getArticlesFromPSTask.execute(articleInfos);
 					break;
@@ -104,7 +111,11 @@ public class PSActivity extends ListActivity implements OnItemClickListener {
 			}
 		};
 
-		PS_GetUrlsTask task = new PS_GetUrlsTask(this, asyncHandler);
+		// Get Article URLS aufrufen
+		// als Params Context, Handler, linkSelector, imgSelector,
+		// callingActivity
+		GetUrlsTask task = new GetUrlsTask(this, asyncHandler, linkSelector,
+				imgSelector, callingActivity);
 		task.execute(BASE_URL);
 
 	}
@@ -125,38 +136,30 @@ public class PSActivity extends ListActivity implements OnItemClickListener {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
-	
-	
-	
-	
-	
-	
 
 	// AsyncTask zum Abrufen der Artikel
 	// Muss iinnerhalb dieser Klasse aufgerufen werden, damit man Zugriff auf
 	// die Shared Prefs hat
-	public class PS_GetArticlesTask extends
+	public class GetArticlesTask extends
 			AsyncTask<ArrayList<ArticleInfo>, Integer, ArrayList<Article>> {
 
 		private final Context context;
 		// Used to send messages back to the mainUI
 		private Handler mainUIHandler;
 
-		public PS_GetArticlesTask(Context context, Handler mainUIHandler) {
+		public GetArticlesTask(Context context, Handler mainUIHandler) {
 			this.context = context;
 			this.mainUIHandler = mainUIHandler;
 		}
 
 		protected ArrayList<Article> doInBackground(
 				ArrayList<ArticleInfo>... params) {
-
+			
 			ArrayList<ArticleInfo> articleInfos = params[0];
 			ArrayList<Article> articles = new ArrayList<Article>();
-			
+
 			Editor edit = prefs.edit();
 			Gson gson = new Gson();
-			
 			
 			// Artikel URLs durchlaufen
 			for (ArticleInfo info : articleInfos) {
@@ -177,7 +180,7 @@ public class PSActivity extends ListActivity implements OnItemClickListener {
 								.nextElementSibling().text();
 						// HTML Content
 						String content = doc.select(".articleBody").html();
-						
+
 						// Artikel Objekt bauen
 						Article article = new Article(info.getUrl(),
 								info.getImg());
@@ -189,23 +192,23 @@ public class PSActivity extends ListActivity implements OnItemClickListener {
 
 						// Artikel Objekt zur Liste hinzufügen
 						articles.add(article);
-						
+
 						// Artikel Objekt als Json in den Shared Prefs cachen
 						String json = gson.toJson(article, Article.class);
-						
+
 						edit.putString(article.getUrl(), json);
-						edit.apply(); 
-						
+						edit.apply();
 
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}
-				else{
+				} else {
 					// Artikel Objekt aus JSON String in den Shared Prefs bauen
-					Article article = gson.fromJson(prefs.getString(info.getUrl(), "n/a"), Article.class);
-					
+					Article article = gson.fromJson(
+							prefs.getString(info.getUrl(), "n/a"),
+							Article.class);
+
 					// Artikel Objekt zur Liste hinzufügen
 					articles.add(article);
 				}
