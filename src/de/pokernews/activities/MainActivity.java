@@ -11,14 +11,12 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 
-	private Button btnPS;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		Button btnPS = (Button) findViewById(R.id.btnPS);
 
 	}
 
@@ -31,6 +29,11 @@ public class MainActivity extends Activity {
 
 	public void openPS(View v){
 		Intent i = new Intent(this, PSActivity.class);
+		startActivity(i);
+	}
+	
+	public void openHP(View v){
+		Intent i = new Intent(this, HPActivity.class);
 		startActivity(i);
 	}
 }

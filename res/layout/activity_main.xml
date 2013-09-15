@@ -9,12 +9,24 @@
     tools:context=".PSActivity" >
 
     <Button
+        android:id="@+id/btnHochgepokert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnPS"
+        android:layout_alignBottom="@+id/btnPS"
+        android:layout_alignParentRight="true"
+        android:onClick="openHP"
+        android:text="Hochgepokert" />
+
+    <Button
         android:id="@+id/btnPS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="PS.de" 
-        android:onClick="openPS"/>
+        android:layout_marginTop="15dp"
+        android:layout_toLeftOf="@+id/btnHochgepokert"
+        android:onClick="openPS"
+        android:text="PS.de" />
 
 </RelativeLayout>

@@ -17,7 +17,7 @@ import android.os.Handler;
 import android.os.Message;
 
 public class PS_GetArticlesTask extends
-		AsyncTask<ArrayList<PS_ArticleInfo>, Integer, ArrayList<PS_Article>> {
+		AsyncTask<ArrayList<ArticleInfo>, Integer, ArrayList<Article>> {
 
 	private final Context context;
 	// Used to send messages back to the mainUI
@@ -29,12 +29,12 @@ public class PS_GetArticlesTask extends
 		this.mainUIHandler = mainUIHandler;
 	}
 
-	protected ArrayList<PS_Article> doInBackground(ArrayList<PS_ArticleInfo>... params) {
+	protected ArrayList<Article> doInBackground(ArrayList<ArticleInfo>... params) {
 
-		ArrayList<PS_ArticleInfo> articleInfos = params[0];
-		ArrayList<PS_Article> articles = new ArrayList<PS_Article>();
+		ArrayList<ArticleInfo> articleInfos = params[0];
+		ArrayList<Article> articles = new ArrayList<Article>();
 			
-		for (PS_ArticleInfo info : articleInfos) {
+		for (ArticleInfo info : articleInfos) {
 			Document doc;
 			try {
 				doc = Jsoup.connect(info.getUrl()).get();
@@ -45,7 +45,7 @@ public class PS_GetArticlesTask extends
 				String content = doc.select(".articleBody").html();
 				
 				
-				PS_Article article = new PS_Article(info.getUrl(), info.getImg());
+				Article article = new Article(info.getUrl(), info.getImg());
 				article.setTitle(title);
 				article.setDate(date);
 				article.setHeadline(headline);
@@ -64,7 +64,7 @@ public class PS_GetArticlesTask extends
 	}
 
 	@Override
-	protected void onPostExecute(ArrayList<PS_Article> articles) {
+	protected void onPostExecute(ArrayList<Article> articles) {
 		PSActivity psActivity = (PSActivity) context;
 		psActivity.articles = articles;
 		super.onPostExecute(articles);

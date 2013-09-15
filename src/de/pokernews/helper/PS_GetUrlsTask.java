@@ -16,10 +16,10 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 
-public class PS_GetUrlsTask extends AsyncTask<String, Integer, ArrayList<PS_ArticleInfo>> {
+public class PS_GetUrlsTask extends AsyncTask<String, Integer, ArrayList<ArticleInfo>> {
 
 
-	private ArrayList<PS_ArticleInfo> articleInfos = new ArrayList<PS_ArticleInfo>();	   
+	private ArrayList<ArticleInfo> articleInfos = new ArrayList<ArticleInfo>();	   
 	private final Context context; 
 	//Used to send messages back to the mainUI
     private Handler mainUIHandler;
@@ -31,7 +31,7 @@ public class PS_GetUrlsTask extends AsyncTask<String, Integer, ArrayList<PS_Arti
 	}
 
 	@Override
-	protected ArrayList<PS_ArticleInfo> doInBackground(String... urls) {
+	protected ArrayList<ArticleInfo> doInBackground(String... urls) {
 		
 		String url = urls[0];
 		
@@ -42,7 +42,7 @@ public class PS_GetUrlsTask extends AsyncTask<String, Integer, ArrayList<PS_Arti
 			
 			for (Element link : links){
 				String articleURL = link.attr("abs:href");
-				PS_ArticleInfo articleInfo = new PS_ArticleInfo(articleURL);
+				ArticleInfo articleInfo = new ArticleInfo(articleURL);
 				articleInfos.add(articleInfo);
 			}
 			
@@ -65,7 +65,7 @@ public class PS_GetUrlsTask extends AsyncTask<String, Integer, ArrayList<PS_Arti
 	}
 
 	@Override
-	protected void onPostExecute(ArrayList<PS_ArticleInfo> articleInfos) {
+	protected void onPostExecute(ArrayList<ArticleInfo> articleInfos) {
 		PSActivity psActivity = (PSActivity) context;
 		psActivity.articleInfos = articleInfos;       
 	    super.onPostExecute(articleInfos); 	
