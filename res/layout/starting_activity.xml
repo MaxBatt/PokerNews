@@ -1,0 +1,88 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ButtonsTable"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <TableRow
+        android:id="@+id/tr1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <ImageView
+            android:id="@+id/btnPS"
+            android:layout_width="180dp"
+            android:layout_height="213dp"
+            android:background="#000000"
+            android:gravity="center"
+            android:onClick="openPS"
+            android:padding="1dp"
+            android:src="@drawable/bg_ps" />
+
+        <ImageView
+            android:id="@+id/btnHGP"
+            android:layout_width="180dp"
+            android:layout_height="213dp"
+            android:background="#000000"
+            android:gravity="center"
+            android:onClick="openHGP"
+            android:padding="1dp"
+            android:src="@drawable/bg_hgp" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tr2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <ImageView
+            android:id="@+id/btnPO"
+            android:layout_width="180dp"
+            android:layout_height="213dp"
+            android:background="#000000"
+            android:gravity="center"
+            android:onClick="openPO"
+            android:padding="1dp"
+            android:src="@drawable/bg_po" />
+
+        <ImageView
+            android:id="@+id/btnPN"
+            android:layout_width="180dp"
+            android:layout_height="213dp"
+            android:background="#000000"
+            android:gravity="center"
+            android:onClick="openPN"
+            android:padding="1dp"
+            android:src="@drawable/bg_pn" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tr3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <ImageView
+            android:id="@+id/btnHDB"
+            android:layout_width="180dp"
+            android:layout_height="213dp"
+            android:background="#000000"
+            android:gravity="center"
+            android:onClick="openHDB"
+            android:padding="1dp"
+            android:src="@drawable/bg_hdb" />
+
+        <ImageView
+            android:id="@+id/btnCP"
+            android:layout_width="180dp"
+            android:layout_height="213dp"
+            android:background="#000000"
+            android:gravity="center"
+            android:onClick="openCP"
+            android:padding="1dp"
+            android:src="@drawable/bg_cp" />
+    </TableRow>
+
+</TableLayout>

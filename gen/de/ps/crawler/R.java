@@ -21,20 +21,26 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int cp=0x7f020000;
-        public static final int cp_button=0x7f020001;
-        public static final int hdb=0x7f020002;
-        public static final int hdb_button=0x7f020003;
-        public static final int hgp=0x7f020004;
-        public static final int hgp_button=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int logo=0x7f020007;
-        public static final int pn=0x7f020008;
-        public static final int pn_button=0x7f020009;
-        public static final int po=0x7f02000a;
-        public static final int po_button=0x7f02000b;
-        public static final int ps=0x7f02000c;
-        public static final int ps_button=0x7f02000d;
+        public static final int bg_cp=0x7f020000;
+        public static final int bg_hdb=0x7f020001;
+        public static final int bg_hgp=0x7f020002;
+        public static final int bg_pn=0x7f020003;
+        public static final int bg_po=0x7f020004;
+        public static final int bg_ps=0x7f020005;
+        public static final int cp=0x7f020006;
+        public static final int cp_button=0x7f020007;
+        public static final int hdb=0x7f020008;
+        public static final int hdb_button=0x7f020009;
+        public static final int hgp=0x7f02000a;
+        public static final int hgp_button=0x7f02000b;
+        public static final int ic_launcher=0x7f02000c;
+        public static final int logo=0x7f02000d;
+        public static final int pn=0x7f02000e;
+        public static final int pn_button=0x7f02000f;
+        public static final int po=0x7f020010;
+        public static final int po_button=0x7f020011;
+        public static final int ps=0x7f020012;
+        public static final int ps_button=0x7f020013;
     }
     public static final class id {
         public static final int ButtonsTable=0x7f08000d;
@@ -70,7 +76,8 @@ public final class R {
         public static final int activity_main=0x7f030000;
         public static final int main_activity=0x7f030001;
         public static final int ps_article_row=0x7f030002;
-        public static final int webview=0x7f030003;
+        public static final int starting_activity=0x7f030003;
+        public static final int webview=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f070000;
