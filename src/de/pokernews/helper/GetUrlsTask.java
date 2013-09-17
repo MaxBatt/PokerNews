@@ -8,6 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import de.pokernews.activities.ArticleListActivity;
 import de.pokernews.activities.HDBActivity;
 import de.pokernews.activities.HGPActivity;
 import de.pokernews.activities.PNActivity;
@@ -95,12 +96,13 @@ public class GetUrlsTask extends AsyncTask<String, Integer, ArrayList<ArticleInf
 	@Override
 	protected void onPostExecute(ArrayList<ArticleInfo> articleInfos) {
 		
-		if(callingActivity.equals("PS")){
-				PSActivity psActivity = (PSActivity) context;
-				psActivity.articleInfos = articleInfos;
-				super.onPostExecute(articleInfos); 				
-		}
+		ArticleListActivity activity = (ArticleListActivity) context;
+		activity.articleInfos = articleInfos;
+		super.onPostExecute(articleInfos); 				
 		
+		
+		
+		/*
 		if (callingActivity.equals("PO")) {
 			POActivity activity = (POActivity) context;
 			activity.articleInfos = articleInfos;
@@ -132,7 +134,7 @@ public class GetUrlsTask extends AsyncTask<String, Integer, ArrayList<ArticleInf
 		}
 		
 		
-			
+		*/	
 		       
 	    	
 	    

@@ -62,13 +62,6 @@ public class MainActivity extends Activity {
 		btnPO.setLayoutParams(layoutParams);
 		btnHDB.setLayoutParams(layoutParams);
 		btnCP.setLayoutParams(layoutParams);
-		
-
-		
-
-		
-		
-		
 
 	}
 
@@ -92,7 +85,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void openPS(View v) {
-		Intent i = new Intent(this, PSActivity.class);
+		Intent i = new Intent(this, ArticleListActivity.class);
 		i.putExtra("activity", "PS");
 		startActivity(i);
 	}

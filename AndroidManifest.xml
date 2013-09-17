@@ -73,6 +73,13 @@
             android:configChanges="orientation|screenSize"
             android:icon="@drawable/hdb">
         </activity>
+        
+         <activity
+            android:name="de.pokernews.activities.ArticleListActivity"
+            android:label="@string/ps" 
+            android:configChanges="orientation|screenSize"
+            android:icon="@drawable/ps">
+        </activity>
    
         
     </application>
