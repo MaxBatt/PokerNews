@@ -37,7 +37,7 @@ public class ArticleListAdapter extends ArrayAdapter<ArticleInfo> {
 	// Build ListAdapter from ArrayList
 	public ArticleListAdapter(Context context,
 			ArrayList<ArticleInfo> articleInfos) {
-		super(context, R.layout.ps_article_row, articleInfos);
+		super(context, R.layout.article_row, articleInfos);
 		this.context = context;
 		this.articleInfos = articleInfos;
 		listActivity = (ArticleListActivity) context;
@@ -61,8 +61,8 @@ public class ArticleListAdapter extends ArrayAdapter<ArticleInfo> {
 		int screenWidth = measures[0];
 		int screenHeight = measures[1];
 		
-		int imgWidth  = (screenWidth + 140 )/ 3;
-		int imgHeight = (screenHeight + 100) /6;
+		int imgWidth  = (screenWidth + 00)/ 4;
+		int imgHeight = (screenHeight) /9;
 		
 		
 		System.out.println("Width: " + imgWidth + "\n Height: " + imgHeight);

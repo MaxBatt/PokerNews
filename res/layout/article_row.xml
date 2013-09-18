@@ -7,15 +7,17 @@
     <com.loopj.android.image.SmartImageView
         android:id="@+id/imgView"
         android:layout_width="100dp"
-        android:layout_height="100dp"  />
+        android:layout_height="100dp" />
 
     <TextView
         android:id="@+id/tvTitle"
-        android:textSize="16sp"
-        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="11dp" 
-        android:layout_marginLeft="8dp" />
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="8dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:paddingRight="15dp" />
 
 </LinearLayout>
