@@ -49,6 +49,14 @@ public class GetUrlsTask extends
 			for (Element link : links) {
 				if (count > limit)
 					break;
+
+				if (callingActivity.equals("CP")) {
+					if (link.parent().previousElementSibling()
+							.hasClass("video") || link.parent().previousElementSibling().hasClass("hand_matchup")) {
+						continue;
+					}
+				}
+
 				String articleURL = link.attr("abs:href");
 				ArticleInfo articleInfo = new ArticleInfo(articleURL);
 				articleInfo.setTitle(link.text());
@@ -72,6 +80,12 @@ public class GetUrlsTask extends
 					imgURL = "http://www.pokerolymp.com" + imgURL;
 				}
 
+				if (callingActivity.equals("CP")) {
+					if (img.parent().hasClass("video")|| img.parent().hasClass("hand_matchup")) {
+						continue;
+					}
+				}
+
 				// System.out.println("url: " + imgURL);
 
 				articleInfos.get(count).setImg(imgURL);
@@ -81,7 +95,7 @@ public class GetUrlsTask extends
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
+
 		}
 
 		return articleInfos;
@@ -97,11 +111,10 @@ public class GetUrlsTask extends
 		// We should probably let the Main UI know we're done...
 		// Let's send a message!
 		Message msg = Message.obtain();
-		
-		if(articleInfos.size() > 0){
+
+		if (articleInfos.size() > 0) {
 			msg.what = 1;
-		}
-		else{
+		} else {
 			msg.what = 0;
 		}
 		mainUIHandler.sendMessage(msg);
