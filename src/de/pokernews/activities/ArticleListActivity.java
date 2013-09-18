@@ -16,6 +16,7 @@ import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -146,5 +147,18 @@ public class ArticleListActivity extends ListActivity implements OnItemClickList
 
 	public String getBaseURL() {
 		return baseURL;
+	}
+	
+	
+	public int[] getMeasures() {
+		DisplayMetrics dm = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(dm);
+		String width = "" + dm.widthPixels;
+		String height = "" + dm.heightPixels;
+		int[] measures = new int[2];
+		measures[0] = Integer.parseInt(width);
+		measures[1] = Integer.parseInt(height);
+
+		return measures;
 	}
 }

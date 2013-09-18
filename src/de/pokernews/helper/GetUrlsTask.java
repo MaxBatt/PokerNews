@@ -47,7 +47,7 @@ public class GetUrlsTask extends AsyncTask<String, Integer, ArrayList<ArticleInf
 			
 			
 			int count = 0;
-			int limit = 11;
+			int limit = 20;
 			for (Element link : links){
 				if(count > limit) break;
 				String articleURL = link.attr("abs:href");

@@ -61,7 +61,7 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	private int[] getMeasures() {
+	public int[] getMeasures() {
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		String width = "" + dm.widthPixels;

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="3dp"
-    android:layout_marginTop="3dp" >
+>
 
     
 
@@ -12,33 +11,18 @@
     android:id="@+id/imgView"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" 
         android:layout_marginLeft="15dp" />
     
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imgView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
         android:layout_marginRight="10dp"
-        android:layout_toRightOf="@+id/imgView"
         android:gravity="bottom"
         android:layout_marginBottom ="26dp"
         android:layout_marginLeft="12dp" 
         android:textSize="13sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:text= "Redbaron1308 aus Deutschland schnappt sich WCOOP-Titel"/>
 
-    <TextView
-        android:id="@+id/tvDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="TextView"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="10dp" />
-
-</RelativeLayout>
+</LinearLayout>
