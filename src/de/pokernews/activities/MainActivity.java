@@ -1,13 +1,16 @@
 package de.pokernews.activities;
 
+import de.pokernews.helper.ConnectionCheck;
 import de.ps.crawler.R;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TableRow;
 
@@ -20,23 +23,35 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		// Remove TitleBar
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		//this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		setContentView(R.layout.starting_activity);
 
+		ConnectionCheck cc = new ConnectionCheck(getApplicationContext());
+		Boolean isOnline = cc.checkConnection();
+
+		if (!isOnline) {
+			showDialog("Du hast leider keine Verbindung zum Internet. Bitte überprüfe die Verbindung und starte die App erneut.");
+		}
+		
 		btnPS = (ImageView) findViewById(R.id.btnPS);
 		btnHGP = (ImageView) findViewById(R.id.btnHGP);
 		btnPN = (ImageView) findViewById(R.id.btnPN);
 		btnPO = (ImageView) findViewById(R.id.btnPO);
 		btnHDB = (ImageView) findViewById(R.id.btnHDB);
 		btnCP = (ImageView) findViewById(R.id.btnCP);
+		
+		int actionBarHeight = getActionBarHeight();
+		
+		
 
 		int[] displayMeasures = getMeasures();
 		int screenWidth = displayMeasures[0];
-		int screenHeight = displayMeasures[1];
+		int screenHeight = displayMeasures[1] - actionBarHeight;
+		
 
 		int imgWidth = (screenWidth) / 2;
-		int imgHeight = (screenHeight - 40) / 3;
+		int imgHeight = (screenHeight - 38) / 3;
 
 		System.out.println("Width: " + imgWidth + "\n Height: " + imgHeight);
 
@@ -106,5 +121,32 @@ public class MainActivity extends Activity {
 		i.putExtra("activity", "HDB");
 		startActivity(i);
 	}
+	
+	public int getActionBarHeight(){
+		// Calculate ActionBar height
+		TypedValue tv = new TypedValue();
+		int actionBarHeight = 0;
+		if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true))
+		{
+		    actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data,getResources().getDisplayMetrics());
+		}
+		System.out.println("ACTION HEIGHT: "+ actionBarHeight);
+		return actionBarHeight;
+	}
+	
+	protected void showDialog(String msg) {
+		new AlertDialog.Builder(this).setMessage(msg)
+
+		.setPositiveButton("Beenden",
+		// Click Listener
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						// cloase dialog
+						dialog.cancel();
+						MainActivity.this.finish();
+					}
+				}).create().show();
+	}
+	
 
 }

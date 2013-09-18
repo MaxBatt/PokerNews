@@ -43,13 +43,12 @@ public final class R {
         public static final int ps_button=0x7f020013;
     }
     public static final class id {
-        public static final int ButtonsTable=0x7f08000f;
         public static final int TextView01=0x7f08000c;
         public static final int TextView02=0x7f080008;
         public static final int TextView03=0x7f08000b;
         public static final int TextView04=0x7f080009;
         public static final int TextView05=0x7f08000a;
-        public static final int action_settings=0x7f08001a;
+        public static final int action_settings=0x7f080014;
         public static final int btnCP=0x7f080005;
         public static final int btnHDB=0x7f080006;
         public static final int btnHGP=0x7f080003;
@@ -58,25 +57,19 @@ public final class R {
         public static final int btnPO=0x7f080000;
         public static final int btnPS=0x7f080001;
         public static final int imgView=0x7f08000d;
+        public static final int tableLayout=0x7f08000f;
         public static final int textView1=0x7f080007;
         public static final int tr1=0x7f080010;
-        public static final int tr2=0x7f080013;
-        public static final int tr3=0x7f080016;
-        public static final int tv1=0x7f080011;
-        public static final int tv2=0x7f080012;
-        public static final int tv3=0x7f080014;
-        public static final int tv4=0x7f080015;
-        public static final int tv5=0x7f080017;
-        public static final int tv6=0x7f080018;
+        public static final int tr2=0x7f080011;
+        public static final int tr3=0x7f080012;
         public static final int tvTitle=0x7f08000e;
-        public static final int webView1=0x7f080019;
+        public static final int webView1=0x7f080013;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int article_row=0x7f030001;
-        public static final int main_activity=0x7f030002;
-        public static final int starting_activity=0x7f030003;
-        public static final int webview=0x7f030004;
+        public static final int starting_activity=0x7f030002;
+        public static final int webview=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f070000;
