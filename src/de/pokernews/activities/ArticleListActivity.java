@@ -47,7 +47,7 @@ public class ArticleListActivity extends ListActivity implements
 
 		setVariables(callingActivity);
 		SiteInfos siteInfos = getSiteInfos();
-		
+
 		getActionBar().setIcon(siteInfos.getResID());
 		getActionBar().setTitle(siteInfos.getSitename());
 
@@ -171,13 +171,13 @@ public class ArticleListActivity extends ListActivity implements
 		} else if (callingActivity.equals("PO")) {
 			filename = "po_button";
 			sitename = "PokerOlymp";
-		}else if (callingActivity.equals("PN")) {
+		} else if (callingActivity.equals("PN")) {
 			filename = "pn_button";
 			sitename = "PokerNews";
-		}else if (callingActivity.equals("HDB")) {
+		} else if (callingActivity.equals("HDB")) {
 			filename = "hdb_button";
 			sitename = "HighstakesDB";
-		}else if (callingActivity.equals("CP")) {
+		} else if (callingActivity.equals("CP")) {
 			filename = "cp_button";
 			sitename = "CardPlayer";
 		}

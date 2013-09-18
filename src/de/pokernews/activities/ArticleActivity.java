@@ -6,21 +6,16 @@ import de.ps.crawler.R;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.Window;
 import android.webkit.WebView;
 
 public class ArticleActivity extends Activity {
 
 	private WebView webView;
 	private static Handler articleHandler;
-	private SharedPreferences prefs;
 	private String content;
 	private ProgressDialog pd;
 	private String callingActivity;
@@ -76,14 +71,6 @@ public class ArticleActivity extends Activity {
 				ArticleActivity.this, articleHandler);
 		getArticleTask.execute(url);
 
-	}
-
-	public SharedPreferences getPrefs() {
-		return prefs;
-	}
-
-	public void setPrefs(SharedPreferences prefs) {
-		this.prefs = prefs;
 	}
 
 	public void setContent(String content) {

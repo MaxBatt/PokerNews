@@ -13,38 +13,36 @@ import android.widget.TableRow;
 
 public class MainActivity extends Activity {
 
-	
 	private ImageView btnPS, btnHGP, btnPN, btnPO, btnHDB, btnCP;
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		//Remove TitleBar
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE); 
-		
+
+		// Remove TitleBar
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
 		setContentView(R.layout.starting_activity);
-		
+
 		btnPS = (ImageView) findViewById(R.id.btnPS);
 		btnHGP = (ImageView) findViewById(R.id.btnHGP);
 		btnPN = (ImageView) findViewById(R.id.btnPN);
 		btnPO = (ImageView) findViewById(R.id.btnPO);
 		btnHDB = (ImageView) findViewById(R.id.btnHDB);
 		btnCP = (ImageView) findViewById(R.id.btnCP);
-		
 
 		int[] displayMeasures = getMeasures();
 		int screenWidth = displayMeasures[0];
 		int screenHeight = displayMeasures[1];
-		
-		int imgWidth  = (screenWidth) /2;
-		int imgHeight = (screenHeight - 40) /3;
-		
+
+		int imgWidth = (screenWidth) / 2;
+		int imgHeight = (screenHeight - 40) / 3;
+
 		System.out.println("Width: " + imgWidth + "\n Height: " + imgHeight);
-		
-		TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(imgWidth, imgHeight);
-		
+
+		TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(
+				imgWidth, imgHeight);
+
 		btnPS.setLayoutParams(layoutParams);
 		btnHGP.setLayoutParams(layoutParams);
 		btnPN.setLayoutParams(layoutParams);
