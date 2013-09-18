@@ -9,14 +9,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import de.pokernews.activities.ArticleListActivity;
-import de.pokernews.activities.HDBActivity;
-import de.pokernews.activities.HGPActivity;
-import de.pokernews.activities.PNActivity;
-import de.pokernews.activities.POActivity;
-import de.pokernews.activities.PSActivity;
-import de.pokernews.activities.CPActivity;
 
-import android.app.Activity;
+
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -58,8 +52,9 @@ public class GetUrlsTask extends AsyncTask<String, Integer, ArrayList<ArticleInf
 				if(count > limit) break;
 				String articleURL = link.attr("abs:href");
 				ArticleInfo articleInfo = new ArticleInfo(articleURL);
+				articleInfo.setTitle(link.text());
 				articleInfos.add(articleInfo);
-				//System.out.println("URL: " + articleInfo.getUrl());
+				//System.out.println("Title: " + articleInfo.getTitle());
 				count ++;
 
 			}
@@ -100,43 +95,6 @@ public class GetUrlsTask extends AsyncTask<String, Integer, ArrayList<ArticleInf
 		activity.articleInfos = articleInfos;
 		super.onPostExecute(articleInfos); 				
 		
-		
-		
-		/*
-		if (callingActivity.equals("PO")) {
-			POActivity activity = (POActivity) context;
-			activity.articleInfos = articleInfos;
-			super.onPostExecute(articleInfos);
-		}
-		
-		if (callingActivity.equals("HGP")) {
-			HGPActivity activity = (HGPActivity) context;
-			activity.articleInfos = articleInfos;
-			super.onPostExecute(articleInfos);
-		}
-		
-		if (callingActivity.equals("PN")) {
-			PNActivity activity = (PNActivity) context;
-			activity.articleInfos = articleInfos;
-			super.onPostExecute(articleInfos);
-		}
-		
-		if (callingActivity.equals("CP")) {
-			CPActivity activity = (CPActivity) context;
-			activity.articleInfos = articleInfos;
-			super.onPostExecute(articleInfos);
-		}
-		
-		if (callingActivity.equals("HDB")) {
-			HDBActivity activity = (HDBActivity) context;
-			activity.articleInfos = articleInfos;
-			super.onPostExecute(articleInfos);
-		}
-		
-		
-		*/	
-		       
-	    	
 	    
 	  //We should probably let the Main UI know we're done...
         //Let's send a message!

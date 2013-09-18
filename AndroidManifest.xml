@@ -28,7 +28,7 @@
         </activity>
         
         <activity
-            android:name="de.pokernews.activities.WebViewActivity"
+            android:name="de.pokernews.activities.ArticleActivity"
             android:label="@string/app_name" >
         </activity>
         

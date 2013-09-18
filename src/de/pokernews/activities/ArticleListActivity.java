@@ -1,29 +1,21 @@
 package de.pokernews.activities;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
-import com.google.gson.Gson;
 
 import de.pokernews.helper.ArticleInfo;
-import de.pokernews.helper.Article;
 import de.pokernews.helper.GetUrlsTask;
 import de.pokernews.helper.ArticleListAdapter;
 import de.ps.crawler.R;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -38,14 +30,12 @@ public class ArticleListActivity extends ListActivity implements OnItemClickList
 	// ProgressDialog
 	private ProgressDialog pd;
 	public ArrayList<ArticleInfo> articleInfos = new ArrayList<ArticleInfo>();
-	public ArrayList<Article> articles = new ArrayList<Article>();
-	private static Handler articleHandler;
-	private SharedPreferences prefs;
 	private String callingActivity;
 	
-	final static String PREF_FILE = "de.pokernews";
+	
 	private String baseURL,linkSelector,imgSelector; 
 
+	@SuppressLint("HandlerLeak")
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 
@@ -56,43 +46,24 @@ public class ArticleListActivity extends ListActivity implements OnItemClickList
 		
 		setVariables(callingActivity);
 
-		// Shared Prefs
-		prefs = getSharedPreferences(PREF_FILE, 0);
+		
 
 		// Show ProgressDialog until Gallery is loaded
 		pd = ProgressDialog.show(this, "Bitte warten", "Lade Artikel");
 
-		// Erster Handler
-		// Kriegt die Liste aller Artiekl-URLs zurück und ruft damit
-		// GetArticlesTask auf
+		
 		Handler asyncHandler = new Handler() {
+			@SuppressLint("HandlerLeak")
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
 				// What did that async task say?
 				switch (msg.what) {
 				case 1:
-					// System.out.println(articleURLs.get(0));
-					GetArticlesTask getArticleTask = new GetArticlesTask(
-							ArticleListActivity.this, ArticleListActivity.articleHandler);
-					getArticleTask.execute(articleInfos);
-					break;
-				}
-			}
-		};
-
-		// Zweiter Handler
-		// Kriegt Liste mit Artiekl-Objekten zurück und erstellt damit ListView
-		articleHandler = new Handler() {
-			public void handleMessage(Message msg) {
-				super.handleMessage(msg);
-				// What did that async task say?
-				switch (msg.what) {
-				case 1:
-
+					
 					// Create ListAdapter
-					adapter = new ArticleListAdapter(ArticleListActivity.this, articles);
+					adapter = new ArticleListAdapter(ArticleListActivity.this, articleInfos);
 					setListAdapter(adapter);
-
+					
 					// Fill ListView
 					ListView listView = getListView();
 
@@ -101,11 +72,14 @@ public class ArticleListActivity extends ListActivity implements OnItemClickList
 
 					// Dismiss ProgressDialog, when Gallery is loaded
 					pd.dismiss();
+					
+					
 
 					break;
 				}
 			}
 		};
+
 
 		// Get Article URLS aufrufen
 		// als Params Context, Handler, linkSelector, imgSelector,
@@ -120,8 +94,9 @@ public class ArticleListActivity extends ListActivity implements OnItemClickList
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 
-		Intent i = new Intent(ArticleListActivity.this, WebViewActivity.class);
-		i.putExtra("content", articles.get(position).getContent());
+		Intent i = new Intent(ArticleListActivity.this, ArticleActivity.class);
+		i.putExtra("url", articleInfos.get(position).getUrl());
+		i.putExtra("activity", callingActivity);
 		startActivity(i);
 
 	}
@@ -133,116 +108,7 @@ public class ArticleListActivity extends ListActivity implements OnItemClickList
 		return true;
 	}
 
-	// AsyncTask zum Abrufen der Artikel
-	// Muss iinnerhalb dieser Klasse aufgerufen werden, damit man Zugriff auf
-	// die Shared Prefs hat
-	public class GetArticlesTask extends
-			AsyncTask<ArrayList<ArticleInfo>, Integer, ArrayList<Article>> {
-
-		private final Context context;
-		// Used to send messages back to the mainUI
-		private Handler mainUIHandler;
-
-		public GetArticlesTask(Context context, Handler mainUIHandler) {
-			this.context = context;
-			this.mainUIHandler = mainUIHandler;
-		}
-
-		protected ArrayList<Article> doInBackground(
-				ArrayList<ArticleInfo>... params) {
-			
-			ArrayList<ArticleInfo> articleInfos = params[0];
-			ArrayList<Article> articles = new ArrayList<Article>();
-
-			Editor edit = prefs.edit();
-			Gson gson = new Gson();
-			
-			// Artikel URLs durchlaufen
-			for (ArticleInfo info : articleInfos) {
-				// Wenn Artikel noch nicht gecached ist
-				if (!prefs.contains(info.getUrl())) {
-					Document doc;
-					try {
-						// Artikel abrufen
-						doc = Jsoup.connect(info.getUrl()).get();
-						// Titel
-						String title = doc.select(".articleBody h1").first()
-								.text();
-						// DAtum
-						String date = doc.select(".articleBody p").first()
-								.text();
-						// Headline
-						String headline = doc.select(".articleBody h1").first()
-								.nextElementSibling().text();
-						
-						// Links aus Text entfernen
-						doc.select("a").removeAttr("href");
-						
-						doc.select(".articleBody div").first().remove();
-						doc.select(".articleBody div").last().remove();
-						doc.select(".articleBody div").last().remove();
-						doc.select(".articleBody div").last().remove();
-						doc.select(".articleBody div").last().remove();
-						doc.select(".articleBody div").last().remove();
-						doc.select(".articleBody div").last().remove();
-						doc.select(".articleBody div").last().remove();
-						
-						
-						
-						// HTML Content
-						String content = doc.select(".articleBody").html() + doc.select("#comments").html();
-
-						// Artikel Objekt bauen
-						Article article = new Article(info.getUrl(),
-								info.getImg());
-						article.setTitle(title);
-						article.setDate(date);
-						article.setHeadline(headline);
-						article.setContent(content);
-						article.setImgURL(info.getImg());
-
-						// Artikel Objekt zur Liste hinzufügen
-						articles.add(article);
-
-						// Artikel Objekt als Json in den Shared Prefs cachen
-						String json = gson.toJson(article, Article.class);
-
-						edit.putString(article.getUrl(), json);
-						edit.apply();
-
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				} else {
-					// Artikel Objekt aus JSON String in den Shared Prefs bauen
-					Article article = gson.fromJson(
-							prefs.getString(info.getUrl(), "n/a"),
-							Article.class);
-
-					// Artikel Objekt zur Liste hinzufügen
-					articles.add(article);
-				}
-			}
-
-			return articles;
-		}
-
-		@Override
-		protected void onPostExecute(ArrayList<Article> articles) {
-			ArticleListActivity psActivity = (ArticleListActivity) context;
-			psActivity.articles = articles;
-			super.onPostExecute(articles);
-
-			// We should probably let the Main UI know we're done...
-			// Let's send a message!
-			Message msg = Message.obtain();
-			msg.what = 1; // A public enumeration signifying success would be
-							// better.
-			mainUIHandler.sendMessage(msg);
-		}
-
-	}
+	
 	
 	
 	private void setVariables(String callingActivity){
@@ -251,6 +117,34 @@ public class ArticleListActivity extends ListActivity implements OnItemClickList
 			 linkSelector =  ".top-news div h5 a";
 			 imgSelector = ".top-news a img";
 		}
+		if(callingActivity.equals("HGP")){
+			 baseURL = "http://www.hochgepokert.com/";
+			 linkSelector =  "#hgp_link_div";
+			 imgSelector = "#image-over a img";
+		}
+		if(callingActivity.equals("PO")){
+			 baseURL = "http://www.pokerolymp.com/";
+			 linkSelector =  ".article h2 a";
+			 imgSelector = ".entry-info img";
+		}
+		if(callingActivity.equals("PN")){
+			 baseURL = "http://de.pokernews.com/neuigkeiten/popular-this-week/";
+			 linkSelector =  "section ul li div a";
+			 imgSelector = "section ul li a img";
+		}
+		if(callingActivity.equals("HDB")){
+			 baseURL = "http://www.highstakesdb.com/";
+			 linkSelector =  ".NewsTitle a";
+			 imgSelector = ".NewsImage a img";
+		}
+		if(callingActivity.equals("CP")){
+			 baseURL = "http://www.cardplayer.com/poker-news";
+			 linkSelector =  ".newsinfo a";
+			 imgSelector = ".newsicon img";
+		}
 	}
 
+	public String getBaseURL() {
+		return baseURL;
+	}
 }

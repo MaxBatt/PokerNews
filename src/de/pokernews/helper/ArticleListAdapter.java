@@ -19,20 +19,19 @@ import android.widget.TextView;
 
 
 
-public class ArticleListAdapter extends ArrayAdapter<Article> {
+public class ArticleListAdapter extends ArrayAdapter<ArticleInfo> {
 	private final Context context;
-	private final ArrayList<Article> articles;
+	private final ArrayList<ArticleInfo> articleInfos;
 	private SmartImageView imgView;
-	private TextView tvDate;
 	private TextView tvTitle;
 	
 
 	// Build ListAdapter from ArrayList
 	public ArticleListAdapter(Context context,
-			ArrayList<Article> articles) {
-		super(context, R.layout.ps_article_row, articles);
+			ArrayList<ArticleInfo> articleInfos) {
+		super(context, R.layout.ps_article_row, articleInfos);
 		this.context = context;
-		this.articles = articles;
+		this.articleInfos = articleInfos;
 	}
 
 	@Override
@@ -46,15 +45,14 @@ public class ArticleListAdapter extends ArrayAdapter<Article> {
 		
 		// Put image in row via WebCachedImageView
 		imgView = (SmartImageView) rowView.findViewById(R.id.imgView);
-		imgView.setImageUrl(articles.get(position).getImgURL());
+		imgView.setImageUrl(articleInfos.get(position).getImg());
 		
 		tvTitle = (TextView) rowView.findViewById(R.id.tvTitle);
-		tvDate = (TextView) rowView.findViewById(R.id.tvDate);
 		
 		//System.out.println("img id: " + imageList.get(position).getId());
-		tvTitle.setText(articles.get(position).getTitle());
+		tvTitle.setText(articleInfos.get(position).getTitle());
 		
-		tvDate.setText(articles.get(position).getDate());
+		//tvDate.setText(articles.get(position).getDate());
 		
 		
 		// Return ListRow.
