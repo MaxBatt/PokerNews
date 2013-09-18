@@ -1,5 +1,7 @@
 package de.pokernews.activities;
 
+import java.net.URLEncoder;
+
 import de.pokernews.helper.GetArticleTask;
 import de.pokernews.helper.SiteInfos;
 import de.ps.crawler.R;
@@ -58,7 +60,7 @@ public class ArticleActivity extends Activity {
 						String html = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN''http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'><html xmlns='http://www.w3.org/1999/xhtml' xml:lang='de' lang='de'><head><meta name='language' content='german, de, deutsch' /><meta http-equiv='Content-Type' content='text/html; charset=utf-8' /><title></title></head><body>"
 								+ content + "</body></html>";
 
-						webView.loadData(html, "text/html", null);
+						webView.loadData(html, "text/html; charset=utf-8", "ISO-8859-1");
 
 						pd.hide();
 					}

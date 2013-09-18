@@ -12,8 +12,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
@@ -76,6 +78,9 @@ public class ArticleListActivity extends ListActivity implements
 					// Dismiss ProgressDialog, when Gallery is loaded
 					pd.dismiss();
 
+					break;
+				case 0:
+					showDialog("Leider gab es einen Fehler bei der Verbindung. Bitte versuche es nochmal.");
 					break;
 				}
 			}
@@ -185,5 +190,19 @@ public class ArticleListActivity extends ListActivity implements
 		resID = res.getIdentifier(filename, "drawable", this.getPackageName());
 		SiteInfos siteInfos = new SiteInfos(resID, sitename);
 		return siteInfos;
+	}
+	
+	public void showDialog(String msg) {
+		new AlertDialog.Builder(this).setMessage(msg)
+
+		.setPositiveButton("Zurück zur Übersicht",
+		// Click Listener
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						// cloase dialog
+						dialog.cancel();
+						ArticleListActivity.super.onBackPressed();
+					}
+				}).create().show();
 	}
 }

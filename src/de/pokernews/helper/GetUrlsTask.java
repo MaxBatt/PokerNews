@@ -81,6 +81,7 @@ public class GetUrlsTask extends
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		}
 
 		return articleInfos;
@@ -96,8 +97,13 @@ public class GetUrlsTask extends
 		// We should probably let the Main UI know we're done...
 		// Let's send a message!
 		Message msg = Message.obtain();
-		msg.what = 1; // A public enumeration signifying success would be
-						// better.
+		
+		if(articleInfos.size() > 0){
+			msg.what = 1;
+		}
+		else{
+			msg.what = 0;
+		}
 		mainUIHandler.sendMessage(msg);
 	}
 

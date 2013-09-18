@@ -35,6 +35,7 @@ public class GetArticleTask extends AsyncTask<String, Integer, String> {
 		try {
 			// Artikel abrufen
 			doc = Jsoup.connect(url).get();
+			
 			if (articleActivity.getActivity().equals("PS")) {
 				content = getPSArticle(doc);
 			} else if (articleActivity.getActivity().equals("HGP")) {
@@ -53,6 +54,9 @@ public class GetArticleTask extends AsyncTask<String, Integer, String> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		content.replace("Û", "&euro;");
+		System.out.println(content);
 		return content;
 	}
 
